@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+
+//linear linked list
 class Node{
 public:
     int value;
