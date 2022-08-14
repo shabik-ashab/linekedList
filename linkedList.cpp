@@ -65,12 +65,16 @@ void reversedListPrint(Node* n)
 // when fast pointer find last node slow pointer will point mid of the list
 
 //corner case
-//c1: 
+//c1: head empty 
+//c2: if the list is even 
 int findMid (Node* &head){
+    //c1: head empty 
+    if(head == NULL) return -1;
     Node* slow = head;
     Node* fast = head;
 
-    while(fast->Next!=NULL){
+    //c2: if the list is even 
+    while(fast!=NULL && fast->Next!=NULL){
         slow = slow->Next;
         fast = fast->Next->Next;
     }
