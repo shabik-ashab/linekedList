@@ -50,15 +50,42 @@ void inserAtHead(Node* &head, int val){
     Node* newNode = new Node(val);
     //s2 update of new node->Next
     newNode->Next = head;
+
     //s3 update the tail with new head
     //this step is to make list circular
+
+    // checking corner case
+    if(head == NULL){
+        head = newNode;
+        // making it circular
+        newNode->Next = head;
+        return;
+    }
+
     Node* temp = head;
     while(temp->Next != head){
         temp = temp->Next;
     }
     temp->Next = newNode;
+
     //s4 update of head
     head = newNode;
+}
+
+
+void display(Node* head){
+    Node* temp = head;
+
+    if(head == NULL) {
+        cout<<"The linked list is empty"<<endl;
+        return;
+    }
+
+    do{
+        cout<<temp->value;
+        temp = temp->Next;
+        if(temp!=head)cout<<" -> ";
+    }while(temp != head);
 }
 
 
