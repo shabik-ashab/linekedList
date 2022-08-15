@@ -109,6 +109,26 @@ void deletionAtHead(Node* &head){
     }
 }
 
+void deletionAtTail(Node* &head){
+    Node* temp = head;
+    if(temp != NULL && temp->Next != head){
+        while(temp->Next->Next != head){
+            temp = temp->Next;
+        }
+
+        Node* delNode = temp->Next;
+        temp->Next = delNode->Next;
+
+        delete delNode;
+    }else{
+        //head is null
+        if(temp == NULL) cout<<"there is no value in the linked list"<<endl;
+
+        // head is tail
+        else deletionAtHead(head);
+    }
+}
+
 // reason to use do while loop:
 // for circular linked list we usually check if 
 // something is equal to head or not 
