@@ -60,6 +60,18 @@ void inserAtHead(Node* &head, int val){
     head = newNode;
 }
 
+int countLength(Node* &head){
+    int count = 0;
+    Node* temp = head;
+
+    while(temp != NULL){
+        count++;
+        temp = temp->Next;
+    }
+
+    return count;
+}
+
 
 //find mid using two pointer
 //we will have two pointer. one is slow and one is fast pointer.
