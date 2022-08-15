@@ -72,6 +72,26 @@ void deletionAtHead(Node* &head){
     }
 }
 
+void deletionAtTail(Node* &head){
+    Node* temp = head;
+    if(temp != NULL && temp->Next != NULL){
+        while(temp->Next->Next != NULL){
+            temp = temp->Next;
+        }
+
+        Node* delNode = temp->Next;
+        temp->Next = NULL;
+
+        delete delNode;
+    }else{
+        //head is null
+        if(temp == NULL) cout<<"there is no value in the linked list"<<endl;
+
+        // head is tail
+        else deletionAtHead(head);
+    }
+}
+
 int countLength(Node* &head){
     int count = 0;
     Node* temp = head;
