@@ -90,21 +90,42 @@ int findMid (Node* &head){
 // So it will look like a cycle 
 //make cycle 
 void makeCycle(Node* &head, int pos){
+    // we need to save node adress of position 
+    // and we will make link with tail of the list
     Node* temp = head;
     Node* startNode;
     int count = 1;
 
     while(temp->Next != NULL){
-        if(count==pos) startNode = temp;
+        if(count==pos) {
+            //saving node address of position
+            startNode = temp;
+        }
         temp = temp->Next;
         count++;
     }
 
+    // making link with tail
     temp->Next = startNode;
 }
 
+// if we take a slow and fast pointer and run these threough a cycle 
+// this pointer will eventually meet with each other if there is a cycle
 bool detectCycle(Node* &head){
-    
+    Node* slow = head;
+    Node* fast = head;
+
+    while(fast!=NULL && fast->Next!=NULL){
+        slow = slow->Next;
+        fast = fast->Next->Next;
+
+        //cycle check
+        if(slow->Next == fast->Next){
+            return true;
+        }
+    }
+
+    return false;
 }
 
 int main()
@@ -121,6 +142,9 @@ int main()
     int mid = findMid(head);
 
     cout<<"mid value is: "<<mid<<endl;
+    makeCycle(head,2);
+
+    if(detectCycle(head)) cout<<"cycle detected"<<endl;
 
     return 0;
 }
