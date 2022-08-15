@@ -24,6 +24,17 @@ void display(Node* n){
     }
 }
 
+void reversedListPrint(Node* n)
+{
+    if (n == NULL)
+    return;
+
+    reversedListPrint(n->Next);
+ 
+    if(n->Next != NULL) cout<<" <- ";
+    cout << n->value;
+}
+
 void insertAtTail(Node* &head, int val){
     Node *newNode = new Node(val);
 
@@ -49,17 +60,6 @@ void inserAtHead(Node* &head, int val){
     head = newNode;
 }
 
-
-void reversedListPrint(Node* n)
-{
-    if (n == NULL)
-    return;
-
-    reversedListPrint(n->Next);
- 
-    if(n->Next != NULL) cout<<" <- ";
-    cout << n->value;
-}
 
 //find mid using two pointer
 //we will have two pointer. one is slow and one is fast pointer.
@@ -88,6 +88,7 @@ int findMid (Node* &head){
 // cycle detect and remove
 // cyle means we will get a position and last node will link with this position.
 // So it will look like a cycle 
+
 //make cycle 
 void makeCycle(Node* &head, int pos){
     // we need to save node adress of position 
@@ -109,9 +110,10 @@ void makeCycle(Node* &head, int pos){
     temp->Next = startNode;
 }
 
+//detect cycle
 // if we take a slow and fast pointer and run these threough a cycle 
 // this pointer will eventually meet with each other if there is a cycle
-bool detectCycle(Node* &head){
+bool detectCycle(Node* &head){ 
     Node* slow = head;
     Node* fast = head;
 
@@ -126,6 +128,37 @@ bool detectCycle(Node* &head){
     }
 
     return false;
+}
+
+// removal of cycle
+// for deletaion we will take a slow and fast pointer
+// we will check if fast == cycle 
+// if fast == slow we will set fast to head
+// now we will check which node is tail node
+// if fast->next == slow->next we can break the loop and
+// set NULL on slow->next
+void removeCycle(Node* &head){
+    Node* slow = head;
+    Node* fast = head;
+
+    //s1: fast = slow
+    do{
+        slow = slow->Next;
+        fast = fast->Next->Next;
+    }while(slow!=fast);
+
+    //s2: re initialization of fast
+    fast = head;
+
+    //s3: fast->Next = slow->Next
+    while(fast->Next != slow->Next){
+        // in this step slow and fast pointer will move on same speed
+        slow = slow->Next;
+        fast = fast->Next;
+    }
+
+    //s4: set the tail node
+    slow->Next = NULL;
 }
 
 int main()
@@ -145,6 +178,11 @@ int main()
     makeCycle(head,2);
 
     if(detectCycle(head)) cout<<"cycle detected"<<endl;
+    else cout<<"there is no cycle"<<endl;
+
+    removeCycle(head);
+    if(detectCycle(head)) cout<<"cycle detected"<<endl;
+    else cout<<"there is no cycle"<<endl;
 
     return 0;
 }
