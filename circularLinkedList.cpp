@@ -28,6 +28,7 @@ void insertAtTail(Node* &head, int val){
 
     if(head == NULL){
         head = newNode;
+        // making it circular
         newNode->Next = head;
         return;
     }
@@ -43,6 +44,23 @@ void insertAtTail(Node* &head, int val){
     // setting temp->Next = newNode
     temp->Next = newNode;
 }
+
+void inserAtHead(Node* &head, int val){
+    //s1 newnode creation
+    Node* newNode = new Node(val);
+    //s2 update of new node->Next
+    newNode->Next = head;
+    //s3 update the tail with new head
+    //this step is to make list circular
+    Node* temp = head;
+    while(temp->Next != head){
+        temp = temp->Next;
+    }
+    temp->Next = newNode;
+    //s4 update of head
+    head = newNode;
+}
+
 
 int main()
 {
