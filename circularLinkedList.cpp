@@ -88,6 +88,27 @@ void display(Node* head){
     }while(temp != head);
 }
 
+void deletionAtHead(Node* &head){
+    Node* temp = head;
+    if(temp != NULL){
+        Node* delNode = temp;
+
+        // caching the tail at temp
+        while(temp->Next != head){
+            temp = temp->Next;
+        }
+
+        // adding head to tail
+        temp->Next = delNode->Next;
+        // updating the head
+        head = delNode->Next;
+
+        delete delNode;
+    }else{
+        cout<<"There is no value in the linked list"<<endl;
+    }
+}
+
 // reason to use do while loop:
 // for circular linked list we usually check if 
 // something is equal to head or not 
@@ -119,6 +140,9 @@ int main()
     display(head);
     cout<<endl;
     
-    cout<<countLength(head);
+    cout<<countLength(head)<<endl;
+
+    deletionAtHead(head);
+    display(head);
     return 0;
 }
