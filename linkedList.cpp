@@ -72,16 +72,39 @@ void reversedListPrint(Node* n)
 int findMid (Node* &head){
     //c1: head empty 
     if(head == NULL) return -1;
+
     Node* slow = head;
     Node* fast = head;
 
-    //c2: if the list is even 
+    //c2: if the list is even -> fast!=NULL
     while(fast!=NULL && fast->Next!=NULL){
         slow = slow->Next;
         fast = fast->Next->Next;
     }
 
     return slow->value;
+}
+
+// cycle detect and remove
+// cyle means we will get a position and last node will link with this position.
+// So it will look like a cycle 
+//make cycle 
+void makeCycle(Node* &head, int pos){
+    Node* temp = head;
+    Node* startNode;
+    int count = 1;
+
+    while(temp->Next != NULL){
+        if(count==pos) startNode = temp;
+        temp = temp->Next;
+        count++;
+    }
+
+    temp->Next = startNode;
+}
+
+bool detectCycle(Node* &head){
+    
 }
 
 int main()
