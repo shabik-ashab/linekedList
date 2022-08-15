@@ -60,6 +60,18 @@ void inserAtHead(Node* &head, int val){
     head = newNode;
 }
 
+void deletionAtHead(Node* &head){
+    Node* temp = head;
+
+    // we can just move the head one place forward
+    if(temp != NULL){
+        head = temp->Next;
+        delete temp;
+    }else{
+        cout<<"There is no value in the linked list"<<endl;
+    }
+}
+
 int countLength(Node* &head){
     int count = 0;
     Node* temp = head;
@@ -74,11 +86,11 @@ int countLength(Node* &head){
 
 
 //find mid using two pointer
-//we will have two pointer. one is slow and one is fast pointer.
+// we will have two pointer. one is slow and one is fast pointer.
 // fast pointer will move 2x faster than slow pointer 
 // when fast pointer find last node slow pointer will point mid of the list
 
-//corner case
+//corner case:
 //c1: head empty 
 //c2: if the list is even 
 int findMid (Node* &head){
@@ -88,7 +100,7 @@ int findMid (Node* &head){
     Node* slow = head;
     Node* fast = head;
 
-    //c2: if the list is even -> fast!=NULL
+    //c2: if the list is even solved by (fast!=NULL)
     while(fast!=NULL && fast->Next!=NULL){
         slow = slow->Next;
         fast = fast->Next->Next;
@@ -142,7 +154,7 @@ bool detectCycle(Node* &head){
     return false;
 }
 
-// removal of cycle
+//removal of cycle
 // for deletaion we will take a slow and fast pointer
 // we will check if fast == cycle 
 // if fast == slow we will set fast to head

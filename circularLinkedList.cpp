@@ -109,6 +109,16 @@ int countLength(Node* &head){
 
 int main()
 {
+    Node *head = NULL;
+    insertAtTail(head,1);
+    insertAtTail(head,2);
+    insertAtTail(head,3);
+    inserAtHead(head,0);
+    insertAtTail(head,4);
+
+    display(head);
+    cout<<endl;
     
+    cout<<countLength(head);
     return 0;
 }
