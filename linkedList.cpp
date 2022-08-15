@@ -174,7 +174,7 @@ int main()
 
     int mid = findMid(head);
 
-    cout<<"mid value is: "<<mid<<endl;
+    cout<<endl<<"mid value is: "<<mid<<endl;
     makeCycle(head,2);
 
     if(detectCycle(head)) cout<<"cycle detected"<<endl;
