@@ -88,6 +88,24 @@ void display(Node* head){
     }while(temp != head);
 }
 
+// reason to use do while loop:
+// for circular linked list we usually check if 
+// something is equal to head or not 
+// but if we use while loop th econdiotion will be true at first run 
+// and our algorithom will fail
+// do will do the task at first and than check the condition
+int countLength(Node* &head){
+    int count = 0;
+    Node* temp = head;
+
+    do{
+        count++;
+        temp = temp->Next;
+    }while(temp != head);
+
+    return count;
+}
+
 
 int main()
 {
