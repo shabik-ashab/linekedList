@@ -205,6 +205,27 @@ void removeCycle(Node* &head){
     slow->Next = NULL;
 }
 
+// reverse linked list with recursion
+// our plan is to return a newHead from head in this recursive fn
+
+Node *reverseRecursive(Node* head){
+    if(head == NULL || head->Next == NULL){
+        if(head == NULL) cout<<"Linked list is empty"<<endl;
+        // base call
+        return head;
+    }
+
+    // Recursive call
+    // we capture newHead the tail of the list
+    Node* newHead = reverseRecursive(head->Next);
+
+    
+    head->Next->Next = head;
+    head->Next = NULL;
+
+    return newHead;
+}
+
 int main()
 {
     Node *head = NULL;
@@ -214,19 +235,21 @@ int main()
     inserAtHead(head,0);
     insertAtTail(head,4);
 
-    reversedListPrint(head);
+    // reversedListPrint(head);
 
-    int mid = findMid(head);
+    // int mid = findMid(head);
 
-    cout<<endl<<"mid value is: "<<mid<<endl;
-    makeCycle(head,2);
+    // cout<<endl<<"mid value is: "<<mid<<endl;
+    // makeCycle(head,2);
 
-    if(detectCycle(head)) cout<<"cycle detected"<<endl;
-    else cout<<"there is no cycle"<<endl;
+    // if(detectCycle(head)) cout<<"cycle detected"<<endl;
+    // else cout<<"there is no cycle"<<endl;
 
-    removeCycle(head);
-    if(detectCycle(head)) cout<<"cycle detected"<<endl;
-    else cout<<"there is no cycle"<<endl;
+    // removeCycle(head);
+    // if(detectCycle(head)) cout<<"cycle detected"<<endl;
+    // else cout<<"there is no cycle"<<endl;
 
+    head = reverseRecursive(head);
+    display(head);
     return 0;
 }
