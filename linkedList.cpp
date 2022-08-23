@@ -35,6 +35,19 @@ void reversedListPrint(Node* n)
     cout << n->value;
 }
 
+int countLength(Node* &head){
+    int count = 0;
+    Node* temp = head;
+
+    while(temp != NULL){
+        count++;
+        temp = temp->Next;
+    }
+
+    return count;
+}
+
+
 void insertAtTail(Node* &head, int val){
     Node *newNode = new Node(val);
 
@@ -92,17 +105,39 @@ void deletionAtTail(Node* &head){
     }
 }
 
-int countLength(Node* &head){
-    int count = 0;
+//corner case
+//c1: list is empty
+//c2: if user delete head
+//c3: delete tail
+void deltaionAtSpecificPos(Node* head, int pos){
     Node* temp = head;
+    int len = countLength(head);
 
-    while(temp != NULL){
-        count++;
-        temp = temp->Next;
+    // c1:
+    if(temp!=NULL && pos<=len){
+        if(pos == 1) deletionAtHead(head);
+        else if(pos == len) deletionAtTail(head);
+        else{
+            int i = 1;
+        while(i<pos-1){
+            temp = temp->Next;
+            i++;
+        }
+
+        Node* delNode = temp->Next;
+        temp->Next = delNode->Next;
+        delete delNode;
+        }    
+    }else{
+        if(pos>len){
+            cout<<"position out of  bound"<<endl;
+        }else{
+            cout<<"linked list is empty "<<endl;
+        }
     }
-
-    return count;
+    
 }
+
 
 
 //find mid using two pointer
@@ -219,7 +254,7 @@ Node *reverseRecursive(Node* head){
     // we capture newHead the tail of the list
     Node* newHead = reverseRecursive(head->Next);
 
-    
+
     head->Next->Next = head;
     head->Next = NULL;
 
@@ -249,7 +284,8 @@ int main()
     // if(detectCycle(head)) cout<<"cycle detected"<<endl;
     // else cout<<"there is no cycle"<<endl;
 
-    head = reverseRecursive(head);
+    // head = reverseRecursive(head);
+    deltaionAtSpecificPos(head,5);
     display(head);
     return 0;
 }
