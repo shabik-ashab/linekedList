@@ -261,6 +261,31 @@ Node *reverseRecursive(Node* head){
     return newHead;
 }
 
+// revrse Non recursive using three pointer
+// corner case
+Node* revrse(Node* head){
+    Node* prev = NULL;
+    Node* cur = head;
+
+    if(head == NULL){
+        cout<<"Linked list is empty"<<endl;
+        return head;
+    }
+
+    Node* next = head->Next;
+
+    while(true){
+        cur->Next = prev;
+        prev = cur;
+        cur = next;
+        if(cur == NULL) break;
+        next = next->Next;
+    }
+
+    return prev;
+}
+
+
 int main()
 {
     Node *head = NULL;
@@ -284,8 +309,8 @@ int main()
     // if(detectCycle(head)) cout<<"cycle detected"<<endl;
     // else cout<<"there is no cycle"<<endl;
 
-    // head = reverseRecursive(head);
-    deltaionAtSpecificPos(head,5);
+    head = revrse(head);
+    // deltaionAtSpecificPos(head,5);
     display(head);
     return 0;
 }
