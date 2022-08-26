@@ -64,6 +64,28 @@ void insertAtTail(Node* &head, int val){
     temp->Next = newNode;
 }
 
+// insertion at specific position
+//step:
+//s1: create newNode
+//s2: traverse upto pos - 1
+//s3: temp = pos-1
+//s4: newNode->next = temp->next
+//s5: temp->next = newNode;
+void insertionAtSpecifiPos(Node* head,int pos, int val){
+    int i =1;
+    Node* temp = head;
+
+    while(i<pos-1){
+        temp = temp->Next;
+        i++;
+    }
+
+    Node* newNode = new Node(val);
+    newNode->Next = temp->Next;
+    temp->Next = newNode;
+
+}
+
 void inserAtHead(Node* &head, int val){
     //s1 newnode creation
     Node* newNode = new Node(val);
@@ -295,6 +317,8 @@ int main()
     inserAtHead(head,0);
     insertAtTail(head,4);
 
+    insertionAtSpecifiPos(head,3,8);
+
     // reversedListPrint(head);
 
     // int mid = findMid(head);
@@ -309,7 +333,7 @@ int main()
     // if(detectCycle(head)) cout<<"cycle detected"<<endl;
     // else cout<<"there is no cycle"<<endl;
 
-    head = revrse(head);
+    // head = revrse(head);
     // deltaionAtSpecificPos(head,5);
     display(head);
     return 0;
