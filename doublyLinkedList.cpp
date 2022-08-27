@@ -43,7 +43,7 @@ void inserAtHead(Node* &head, int val){
 void display(Node* n){
     while(n != NULL){
         cout<<n->value;
-        if(n->Next != NULL) cout<<" -> ";
+        if(n->Next != NULL) cout<<" <-> ";
         n = n->Next;
     }
 }
@@ -60,6 +60,19 @@ int countLength(Node* &head){
     return count;
 }
 
+void reversePrint(Node* head){
+    Node* temp = head;
+
+    while(temp->Next != NULL){
+        temp = temp->Next;
+    }
+    while(temp != NULL){
+        cout<<temp->value;
+        if(temp->Prev != NULL) cout<<" <-> ";
+        temp = temp->Prev;
+    }
+}
+
 
 
 int main()
@@ -70,6 +83,10 @@ int main()
     insertAtTail(head,3);
     inserAtHead(head,0);
     insertAtTail(head,4);
+
+    // display(head);
+
+    reversePrint(head);
 
     return 0;
 }
