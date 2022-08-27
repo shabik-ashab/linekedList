@@ -64,6 +64,15 @@ void insertAtTail(Node* &head, int val){
     temp->Next = newNode;
 }
 
+void inserAtHead(Node* &head, int val){
+    //s1 newnode creation
+    Node* newNode = new Node(val);
+    //s2 update of new node->Next
+    newNode->Next = head;
+    //s3 update of head
+    head = newNode;
+}
+
 // insertion at specific position
 //step:
 //s1: create newNode
@@ -83,17 +92,8 @@ void insertionAtSpecifiPos(Node* head,int pos, int val){
     Node* newNode = new Node(val);
     newNode->Next = temp->Next;
     temp->Next = newNode;
-
 }
 
-void inserAtHead(Node* &head, int val){
-    //s1 newnode creation
-    Node* newNode = new Node(val);
-    //s2 update of new node->Next
-    newNode->Next = head;
-    //s3 update of head
-    head = newNode;
-}
 
 void deletionAtHead(Node* &head){
     Node* temp = head;
